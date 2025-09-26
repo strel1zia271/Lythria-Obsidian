@@ -2270,9 +2270,7 @@ do
 		            (Input.UserInputType == Enum.UserInputType.Keyboard and Input.KeyCode.Name == Key)
 		        )
 		    then
-		        ReleasedKey = true
-			else
-				ReleasedKey = false
+		        ReleasedKey = false
 		    end
 		
 		    if KeyPicker.Mode == "Hold" and ReleasedKey then
