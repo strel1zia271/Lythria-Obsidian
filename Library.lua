@@ -3230,18 +3230,18 @@ do
             Library:UpdateDependencyBoxes()
         end
 
-        function Toggle:SetDisabled(Disabled: boolean)
-            Toggle.Disabled = Disabled
-
-            if Toggle.TooltipTable then
-                Toggle.TooltipTable.Disabled = Toggle.Disabled
-            end
-
-            for _, Addon in pairs(Toggle.Addons) do
-                if Addon.Type == "KeyPicker" and Addon.SyncToggleState then
-                    Addon:Update()
-                end
-            end
+		function Toggle:SetDisabled(Disabled: boolean)
+		    Toggle.Disabled = Disabled
+		
+		    if Toggle.TooltipTable then
+		        Toggle.TooltipTable.Disabled = Toggle.Disabled
+		    end
+		
+		    for _, Addon in pairs(Toggle.Addons) do
+		        if (Addon.Type == "KeyPicker" or Addon.Type == "Hold") and Addon.SyncToggleState then
+		            Addon:Update()
+		        end
+		    end
 
             Button.Active = not Toggle.Disabled
             Toggle:Display()
@@ -3438,12 +3438,12 @@ do
             Toggle.Value = Value
             Toggle:Display()
 
-            for _, Addon in pairs(Toggle.Addons) do
-                if Addon.Type == "KeyPicker" and Addon.SyncToggleState then
-                    Addon.Toggled = Toggle.Value
-                    Addon:Update()
-                end
-            end
+		for _, Addon in pairs(Toggle.Addons) do
+		    if (Addon.Type == "KeyPicker" or Addon.Type == "Hold") and Addon.SyncToggleState then
+		        Addon.Toggled = Toggle.Value
+		        Addon:Update()
+		    end
+		end
 
             Library:SafeCallback(Toggle.Callback, Toggle.Value)
             Library:SafeCallback(Toggle.Changed, Toggle.Value)
@@ -3457,11 +3457,11 @@ do
                 Toggle.TooltipTable.Disabled = Toggle.Disabled
             end
 
-            for _, Addon in pairs(Toggle.Addons) do
-                if Addon.Type == "KeyPicker" and Addon.SyncToggleState then
-                    Addon:Update()
-                end
-            end
+		for _, Addon in pairs(Toggle.Addons) do
+		    if (Addon.Type == "KeyPicker" or Addon.Type == "Hold") and Addon.SyncToggleState then
+		        Addon:Update()
+		    end
+		end
 
             Button.Active = not Toggle.Disabled
             Toggle:Display()
