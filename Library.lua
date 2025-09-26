@@ -2136,19 +2136,20 @@ print("test5")
 		end
 		
 		UserInputService.InputEnded:Connect(function(input)
-		    if input.KeyCode == KeyPicker.CurrentBind then
-		        if KeyPicker.Mode == "Hold" then
-		            KeyPicker.Toggled = false
-		        elseif KeyPicker.Mode == "Press" then
-		            KeyPicker.Toggled = false
-		            if ParentObj.Type == "Toggle" or ParentObj.Type == "Hold" then
-		                ParentObj:SetValue(false)
-		            else
-		                ParentObj:SetValue(false)
-		            end
-		            Library:SafeCallback(KeyPicker.Callback, false)
-		            Library:SafeCallback(KeyPicker.Changed, false)
+		    if input.KeyCode == KeyPicker.CurrentBind and KeyPicker.Mode == "Hold" then
+		        KeyPicker.Toggled = false
+		        if ParentObj.Type == "Toggle" then
+		            ParentObj:SetValue(false)
+				else
+					ParentObj:SetValue(false)
 		        end
+		        if ParentObj.Type == "Hold" then
+		            ParentObj:SetValue(false)
+				else
+					ParentObj:SetValue(false)
+		        end
+		        Library:SafeCallback(KeyPicker.Callback, false)
+		        Library:SafeCallback(KeyPicker.Changed, false)
 		    end
 		end)
 
