@@ -2122,7 +2122,7 @@ print("tested1")
 		        KeyPicker.Toggled = true
 		    end
 		
-		    if (ParentObj.Type == "Toggle" or ParentObj.Type == "Hold") and KeyPicker.SyncToggleState then
+		    if (ParentObj.Type == "Toggle" and ParentObj.Type == "Hold") and KeyPicker.SyncToggleState then
 		        ParentObj:SetValue(false)
 		    end
 		
@@ -2135,8 +2135,6 @@ print("tested1")
 		
 		        if ParentObj.Type == "Toggle" and ParentObj.Type == "Hold" then
 		            ParentObj:SetValue(false)
-				else
-					ParentObj:SetValue(false) print("went to 2nd option idk why")
 		        end
 		
 		        Library:SafeCallback(KeyPicker.Callback, false)
