@@ -2119,14 +2119,10 @@ do
 		        end
 		        KeyPicker.Toggled = not KeyPicker.Toggled
 		    elseif KeyPicker.Mode == "Hold" then
-		        KeyPicker.Toggled = not KeyPicker.Toggled
+		        KeyPicker.Toggled = true
 		    end
 		
-		    if ParentObj.Type == "Toggle" and KeyPicker.SyncToggleState then
-		        ParentObj:SetValue(KeyPicker.Toggled)
-		    end
-		
-		    if ParentObj.Type == "Hold" and KeyPicker.SyncToggleState then
+		    if (ParentObj.Type == "Toggle" or ParentObj.Type == "Hold") and KeyPicker.SyncToggleState then
 		        ParentObj:SetValue(KeyPicker.Toggled)
 		    end
 		
