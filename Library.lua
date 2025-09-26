@@ -2205,18 +2205,16 @@ do
         end)
         Picker.MouseButton2Click:Connect(MenuTable.Toggle)
 
-		Library:GiveSignal(UserInputService.InputBegan:Connect(function(Input)
-		    if KeyPicker.Mode == "Hold" then
-		        local Key = KeyPicker.Value
-		        local HoldingKey = (Input.UserInputType == Enum.UserInputType.Keyboard and Input.KeyCode.Name == Key)
-		            or (SpecialKeysInput[Input.UserInputType] == Key)
-		        if HoldingKey then
-		            KeyPicker.Toggled = true
-		            KeyPicker:DoClick()
-		            KeyPicker:Update()
-		        end
+		Library:GiveSignal(UserInputService.InputBegan:Connect(function(Input: InputObject)
+		    if
+		        KeyPicker.Mode == "Always"
+		        or KeyPicker.Value == "Unknown"
+		        or KeyPicker.Value == "None"
+		        or Picking
+		        or UserInputService:GetFocusedTextBox()
+		    then
+		        return
 		    end
-		end))
 		
 		    local Key = KeyPicker.Value
 		    local HoldingKey = false
@@ -2253,20 +2251,32 @@ do
 		    KeyPicker:Update()
 		end))
 		
-		Library:GiveSignal(UserInputService.InputEnded:Connect(function(Input)
-		    if KeyPicker.Mode == "Hold" then
-		        local Key = KeyPicker.Value
-		        local ReleasedKey = (Input.UserInputType == Enum.UserInputType.Keyboard and Input.KeyCode.Name == Key)
-		            or (SpecialKeysInput[Input.UserInputType] == Key)
-		        if ReleasedKey then
-		            KeyPicker.Toggled = false
-		            if ParentObj.Type == "Toggle" or ParentObj.Type == "Hold" then
-		                ParentObj:SetValue(false)
-		            end
-		            Library:SafeCallback(KeyPicker.Callback, false)
-		            Library:SafeCallback(KeyPicker.Changed, false)
-		            KeyPicker:Update()
-		        end
+		Library:GiveSignal(UserInputService.InputEnded:Connect(function(Input: InputObject)
+		    if
+		        KeyPicker.Value == "Unknown"
+		        or KeyPicker.Value == "None"
+		        or Picking
+		        or UserInputService:GetFocusedTextBox()
+		    then
+		        return
+		    end
+		
+		    local Key = KeyPicker.Value
+		    local ReleasedKey = false
+		
+		    if 
+		        Key and (
+		            SpecialKeysInput[Input.UserInputType] == Key or 
+		            (Input.UserInputType == Enum.UserInputType.Keyboard and Input.KeyCode.Name == Key)
+		        )
+		    then
+		        ReleasedKey = false
+		    end
+		
+		    if KeyPicker.Mode == "Hold" and ReleasedKey then
+		        KeyPicker.Toggled = false
+		        KeyPicker:DoClick()
+		        KeyPicker:Update()
 		    end
 		end))
 		
