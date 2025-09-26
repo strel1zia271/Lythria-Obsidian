@@ -2045,35 +2045,36 @@ do
             Picker.Size = UDim2.fromOffset(X + 9 * Library.DPIScale, Y + 4 * Library.DPIScale)
         end
 
-        function KeyPicker:Update()
-            KeyPicker:Display()
-
-            if Info.NoUI then
-                return
-            end
-
-            if KeyPicker.Mode == "Toggle" and ParentObj.Type == "Toggle" and ParentObj.Disabled then
-                KeybindsToggle:SetVisibility(false)
-                return
-            end
-
-            local State = KeyPicker:GetState()
-            local ShowToggle = Library.ShowToggleFrameInKeybinds and KeyPicker.Mode == "Toggle"
-
-            if KeybindsToggle.Loaded then
-                if ShowToggle then
-                    KeybindsToggle:SetNormal(false)
-                else
-                    KeybindsToggle:SetNormal(true)
-                end
-
-                KeybindsToggle:SetText(("[%s] %s (%s)"):format(KeyPicker.Value, KeyPicker.Text, KeyPicker.Mode))
-                KeybindsToggle:SetVisibility(true)
-                KeybindsToggle:Display(State)
-            end
-
-            Library:UpdateKeybindFrame()
-        end
+		function KeyPicker:Update()
+		    KeyPicker:Display()
+		
+		    if Info.NoUI then
+		        return
+		    end
+		
+		    if (KeyPicker.Mode == "Toggle" and ParentObj.Type == "Toggle" or
+		        KeyPicker.Mode == "Hold" and ParentObj.Type == "Hold") and ParentObj.Disabled then
+		        KeybindsToggle:SetVisibility(false)
+		        return
+		    end
+		
+		    local State = KeyPicker:GetState()
+		    local ShowToggle = Library.ShowToggleFrameInKeybinds and KeyPicker.Mode == "Toggle"
+		
+		    if KeybindsToggle.Loaded then
+		        if ShowToggle then
+		            KeybindsToggle:SetNormal(false)
+		        else
+		            KeybindsToggle:SetNormal(true)
+		        end
+		
+		        KeybindsToggle:SetText(("[%s] %s (%s)"):format(KeyPicker.Value, KeyPicker.Text, KeyPicker.Mode))
+		        KeybindsToggle:SetVisibility(true)
+		        KeybindsToggle:Display(State)
+		    end
+		
+		    Library:UpdateKeybindFrame()
+		end
 
 		function KeyPicker:GetState()
 		    local Key = KeyPicker.Value
