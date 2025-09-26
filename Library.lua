@@ -2117,7 +2117,7 @@ do
 		        if Info.WaitForCallback then return end
 		        KeyPicker.Toggled = not KeyPicker.Toggled
 		    elseif KeyPicker.Mode == "Hold" then
-		        KeyPicker.Toggled = KeyPicker.Toggled
+		        KeyPicker.Toggled = not KeyPicker.Toggled
 		    end
 		
 		    if (ParentObj.Type == "Toggle" or ParentObj.Type == "Hold") and KeyPicker.SyncToggleState then
