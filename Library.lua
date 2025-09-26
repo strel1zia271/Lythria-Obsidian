@@ -2225,23 +2225,25 @@ do
                 HoldingKey = true
             end
 
-            if KeyPicker.Mode == "Toggle" then
-                if HoldingKey then
-                    KeyPicker.Toggled = not KeyPicker.Toggled
-                    KeyPicker:DoClick()
-                end
-
-			elseif KeyPicker.Mode == "Hold" then
-		    if HoldingKey then
-		        KeyPicker.Toggled = true
-		        KeyPicker:DoClick()
-		    end
-
-            elseif KeyPicker.Mode == "Press" then
-                if HoldingKey then
-                    KeyPicker:DoClick()
-                end
-            end
+	if KeyPicker.Mode == "Toggle" then
+	    if HoldingKey then
+	        KeyPicker.Toggled = not KeyPicker.Toggled
+	        KeyPicker:DoClick()
+	    end
+	
+	elseif KeyPicker.Mode == "Hold" then
+	    if HoldingKey then
+	        KeyPicker.Toggled = true
+	        KeyPicker:DoClick()
+	    else
+	        KeyPicker.Toggled = false
+	    end
+	
+	elseif KeyPicker.Mode == "Press" then
+	    if HoldingKey then
+	        KeyPicker:DoClick()
+	    end
+	end
 
             KeyPicker:Update()
         end))
