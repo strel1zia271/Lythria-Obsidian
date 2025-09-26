@@ -2111,7 +2111,7 @@ do
         function KeyPicker:OnClick(Func)
             KeyPicker.Clicked = Func
         end
-print("test6789")
+print("tested1")
 		function KeyPicker:DoClick()
 		    if KeyPicker.Mode == "Press" then
 		        if KeyPicker.Toggled and Info.WaitForCallback == true then
@@ -2135,6 +2135,8 @@ print("test6789")
 		
 		        if ParentObj.Type == "Toggle" and ParentObj.Type == "Hold" then
 		            ParentObj:SetValue(false)
+				else
+					ParentObj:SetValue(false) print("went to 2nd option idk why")
 		        end
 		
 		        Library:SafeCallback(KeyPicker.Callback, false)
