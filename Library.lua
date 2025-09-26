@@ -2133,7 +2133,7 @@ print("test678")
 		    if input.KeyCode == KeyPicker.CurrentBind and KeyPicker.Mode == "Hold" then
 		        KeyPicker.Toggled = false
 		
-		        if ParentObj.Type == "Toggle" or ParentObj.Type == "Hold" then
+		        if ParentObj.Type == "Toggle" and ParentObj.Type == "Hold" then
 		            ParentObj:SetValue(false)
 		        end
 		
