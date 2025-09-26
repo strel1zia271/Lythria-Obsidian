@@ -2111,7 +2111,7 @@ do
         function KeyPicker:OnClick(Func)
             KeyPicker.Clicked = Func
         end
-print("test67")
+print("test678")
 		function KeyPicker:DoClick()
 		    if KeyPicker.Mode == "Press" then
 		        if KeyPicker.Toggled and Info.WaitForCallback == true then
@@ -2120,27 +2120,23 @@ print("test67")
 		        KeyPicker.Toggled = not KeyPicker.Toggled
 		    elseif KeyPicker.Mode == "Hold" then
 		        KeyPicker.Toggled = true
-		        if (ParentObj.Type == "Toggle" or ParentObj.Type == "Hold") and KeyPicker.SyncToggleState then
-		            ParentObj:SetValue(true)
-		        end
-		        Library:SafeCallback(KeyPicker.Callback, true)
 		    end
 		
-		    if KeyPicker.Mode == "Press" and (ParentObj.Type == "Toggle" or ParentObj.Type == "Hold") and KeyPicker.SyncToggleState then
+		    if (ParentObj.Type == "Toggle" or ParentObj.Type == "Hold") and KeyPicker.SyncToggleState then
 		        ParentObj:SetValue(false)
 		    end
 		
-		    if KeyPicker.Mode == "Press" then
-		        Library:SafeCallback(KeyPicker.Callback, KeyPicker.Toggled)
-		    end
+		    Library:SafeCallback(KeyPicker.Callback, KeyPicker.Toggled)
 		end
 		
 		UserInputService.InputEnded:Connect(function(input)
 		    if input.KeyCode == KeyPicker.CurrentBind and KeyPicker.Mode == "Hold" then
 		        KeyPicker.Toggled = false
+		
 		        if ParentObj.Type == "Toggle" or ParentObj.Type == "Hold" then
 		            ParentObj:SetValue(false)
 		        end
+		
 		        Library:SafeCallback(KeyPicker.Callback, false)
 		        Library:SafeCallback(KeyPicker.Changed, false)
 		    end
