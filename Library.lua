@@ -2118,28 +2118,21 @@ do
 		            return
 		        end
 		        KeyPicker.Toggled = not KeyPicker.Toggled
-		        if (ParentObj.Type == "Toggle" or ParentObj.Type == "Hold") and KeyPicker.SyncToggleState then
-		            ParentObj:SetValue(KeyPicker.Toggled)
-		        end
-		        Library:SafeCallback(KeyPicker.Callback, KeyPicker.Toggled)
-		    end
-		end
-		
-		-- Handle hold separately using UserInputService
-		UserInputService.InputBegan:Connect(function(input)
-		    if input.KeyCode == KeyPicker.CurrentBind and KeyPicker.Mode == "Hold" then
+		    elseif KeyPicker.Mode == "Hold" then
 		        KeyPicker.Toggled = true
-		        if (ParentObj.Type == "Toggle" or ParentObj.Type == "Hold") and KeyPicker.SyncToggleState then
-		            ParentObj:SetValue(true)
-		        end
-		        Library:SafeCallback(KeyPicker.Callback, true)
 		    end
-		end)
+		
+		    if (ParentObj.Type == "Toggle" or ParentObj.Type == "Hold") and KeyPicker.SyncToggleState then
+		        ParentObj:SetValue(true)
+		    end
+		
+		    Library:SafeCallback(KeyPicker.Callback, KeyPicker.Toggled)
+		end
 		
 		UserInputService.InputEnded:Connect(function(input)
 		    if input.KeyCode == KeyPicker.CurrentBind and KeyPicker.Mode == "Hold" then
 		        KeyPicker.Toggled = false
-		        if (ParentObj.Type == "Toggle" or ParentObj.Type == "Hold") and KeyPicker.SyncToggleState then
+		        if ParentObj.Type == "Toggle" or ParentObj.Type == "Hold" then
 		            ParentObj:SetValue(false)
 		        end
 		        Library:SafeCallback(KeyPicker.Callback, false)
