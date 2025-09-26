@@ -2117,7 +2117,7 @@ do
 		        if KeyPicker.Toggled and Info.WaitForCallback == true then
 		            return
 		        end
-		        KeyPicker.Toggled = false
+		        KeyPicker.Toggled = true
 		    elseif KeyPicker.Mode == "Hold" then
 		        KeyPicker.Toggled = false
 		    end
