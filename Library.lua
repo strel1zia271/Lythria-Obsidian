@@ -2075,24 +2075,33 @@ do
             Library:UpdateKeybindFrame()
         end
 
-        function KeyPicker:GetState()
-            if KeyPicker.Mode == "Always" then
-                return true
-            elseif KeyPicker.Mode == "Hold" then
-                local Key = KeyPicker.Value
-                if Key == "None" then
-                    return false
-                end
-
-                if SpecialKeys[Key] ~= nil then
-                    return UserInputService:IsMouseButtonPressed(SpecialKeys[Key]) and not UserInputService:GetFocusedTextBox();
-                else
-                    return UserInputService:IsKeyDown(Enum.KeyCode[Key]) and not UserInputService:GetFocusedTextBox();
-                end;
-            else
-                return KeyPicker.Toggled;
-            end
-        end
+		function KeyPicker:GetState()
+		    local Key = KeyPicker.Value
+		
+		    if KeyPicker.Mode == "Always" then
+		        return true
+		    elseif KeyPicker.Mode == "Hold" then
+		        if Key == "None" then
+		            return false
+		        end
+		
+		        local isPressed = false
+		
+		        if SpecialKeys[Key] ~= nil then
+		            isPressed = UserInputService:IsMouseButtonPressed(SpecialKeys[Key])
+		        else
+		            isPressed = UserInputService:IsKeyDown(Enum.KeyCode[Key])
+		        end
+		
+		        if UserInputService:GetFocusedTextBox() then
+		            return false
+		        end
+		
+		        return isPressed
+		    else
+		        return KeyPicker.Toggled
+		    end
+		end
 
         function KeyPicker:OnChanged(Func)
             KeyPicker.Changed = Func
