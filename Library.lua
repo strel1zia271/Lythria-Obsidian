@@ -2102,26 +2102,42 @@ do
             KeyPicker.Clicked = Func
         end
 
-        function KeyPicker:DoClick()
-            if KeyPicker.Mode == "Press" then
-                if KeyPicker.Toggled and Info.WaitForCallback == true then
-                    return
-                end
-
-                KeyPicker.Toggled = true
-            end
-
-            if ParentObj.Type == "Toggle" and KeyPicker.SyncToggleState then
-                ParentObj:SetValue(KeyPicker.Toggled)
-            end
-
-            Library:SafeCallback(KeyPicker.Callback, KeyPicker.Toggled)
-            Library:SafeCallback(KeyPicker.Changed, KeyPicker.Toggled)
-
-            if KeyPicker.Mode == "Press" then
-                KeyPicker.Toggled = false
-            end
-        end
+		function KeyPicker:DoClick()
+		    if KeyPicker.Mode == "Press" then
+		        if KeyPicker.Toggled and Info.WaitForCallback == true then
+		            return
+		        end
+		        KeyPicker.Toggled = true
+		    elseif KeyPicker.Mode == "Hold" then
+		        KeyPicker.Toggled = true 
+		    end
+		
+		    if ParentObj.Type == "Toggle" and KeyPicker.SyncToggleState then
+		        ParentObj:SetValue(KeyPicker.Toggled)
+		    end
+		
+		    if ParentObj.Type == "Hold" and KeyPicker.SyncToggleState then
+		        ParentObj:SetValue(KeyPicker.Toggled)
+		    end
+		
+		    Library:SafeCallback(KeyPicker.Callback, KeyPicker.Toggled)
+		    Library:SafeCallback(KeyPicker.Changed, KeyPicker.Toggled)
+		
+		    if KeyPicker.Mode == "Press" then
+		        KeyPicker.Toggled = false
+		    end
+		end
+		
+		UserInputService.InputEnded:Connect(function(input)
+		    if input.KeyCode == KeyPicker.CurrentBind and KeyPicker.Mode == "Hold" then
+		        KeyPicker.Toggled = false
+		        if ParentObj.Type == "Toggle" or ParentObj.Type == "Hold" then
+		            ParentObj:SetValue(false)
+		        end
+		        Library:SafeCallback(KeyPicker.Callback, false)
+		        Library:SafeCallback(KeyPicker.Changed, false)
+		    end
+		end)
 
         function KeyPicker:SetValue(Data)
             local Key, Mode = Data[1], Data[2]
