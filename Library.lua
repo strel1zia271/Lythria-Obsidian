@@ -2114,7 +2114,7 @@ do
 
 		function KeyPicker:DoClick()
 		    if KeyPicker.Mode == "Press" then
-		        if KeyPicker.Toggled and Info.WaitForCallback then
+		        if KeyPicker.Toggled and Info.WaitForCallback == true then
 		            return
 		        end
 		        KeyPicker.Toggled = false
