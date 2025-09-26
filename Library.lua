@@ -2120,8 +2120,6 @@ do
 		        KeyPicker.Toggled = true
 		    elseif KeyPicker.Mode == "Hold" then
 		        KeyPicker.Toggled = true
-			else
-				KeyPicker.Toggled = false
 		    end
 		
 		    if ParentObj.Type == "Toggle" and KeyPicker.SyncToggleState then
