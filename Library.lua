@@ -2271,6 +2271,8 @@ do
 		        )
 		    then
 		        ReleasedKey = true
+			else
+				ReleasedKey = false
 		    end
 		
 		    if KeyPicker.Mode == "Hold" and ReleasedKey then
