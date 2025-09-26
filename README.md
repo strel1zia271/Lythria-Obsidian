@@ -1,4 +1,4 @@
-# ObsidianAddonsThemes
+# ObsidianAddonsThemes - NOT ORIGINALLY FROM ME
 
 Custom themes and UI components using the Obsidian (LinoriaLib) frameworkm, based on addons from deividcomsono's Obsidian project.
 
