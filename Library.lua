@@ -2120,8 +2120,6 @@ do
 		        KeyPicker.Toggled = true
 		    elseif KeyPicker.Mode == "Hold" then
 		        KeyPicker.Toggled = true
-			else
-				KeyPicker.Toggled = false
 		    end
 		
 		    if ParentObj.Type == "Toggle" and KeyPicker.SyncToggleState then
@@ -2238,8 +2236,6 @@ do
 		        if HoldingKey then
 		            KeyPicker.Toggled = true
 		            KeyPicker:DoClick()
-				else
-					KeyPicker.Toggled = false
 		        end
 		
 		    elseif KeyPicker.Mode == "Press" then
@@ -2271,8 +2267,6 @@ do
 		        )
 		    then
 		        ReleasedKey = true
-			else
-				ReleasedKey = false
 		    end
 		
 		    if KeyPicker.Mode == "Hold" and ReleasedKey then
