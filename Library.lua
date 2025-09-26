@@ -1871,8 +1871,8 @@ do
         end
 
         if KeyPicker.SyncToggleState then
-            Info.Modes = { "Toggle" }
-            Info.Mode = "Toggle"
+            Info.Modes = { "Toggle", "Hold" }
+            Info.Mode = "Toggle", "Hold"
         end
 
         local SpecialKeys = {
