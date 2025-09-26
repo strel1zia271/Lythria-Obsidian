@@ -2114,19 +2114,13 @@ do
 
 		function KeyPicker:DoClick()
 		    if KeyPicker.Mode == "Press" then
-		        if KeyPicker.Toggled and Info.WaitForCallback == true then
-		            return
-		        end
-		        KeyPicker.Toggled = false
+		        if Info.WaitForCallback then return end
+		        KeyPicker.Toggled = not KeyPicker.Toggled
 		    elseif KeyPicker.Mode == "Hold" then
-		        KeyPicker.Toggled = false
+		        KeyPicker.Toggled = not KeyPicker.Toggled
 		    end
 		
-		    if ParentObj.Type == "Toggle" and KeyPicker.SyncToggleState then
-		        ParentObj:SetValue(KeyPicker.Toggled)
-		    end
-		
-		    if ParentObj.Type == "Hold" and KeyPicker.SyncToggleState then
+		    if (ParentObj.Type == "Toggle" or ParentObj.Type == "Hold") and KeyPicker.SyncToggleState then
 		        ParentObj:SetValue(KeyPicker.Toggled)
 		    end
 		
