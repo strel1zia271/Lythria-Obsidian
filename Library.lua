@@ -3218,12 +3218,12 @@ do
             Toggle.Value = Value
             Toggle:Display()
 
-            for _, Addon in pairs(Toggle.Addons) do
-                if Addon.Type == "KeyPicker" and Addon.SyncToggleState then
-                    Addon.Toggled = Toggle.Value
-                    Addon:Update()
-                end
-            end
+		for _, Addon in pairs(Toggle.Addons) do
+		    if (Addon.Type == "KeyPicker" or Addon.Type == "Hold") and Addon.SyncToggleState then
+		        Addon.Toggled = Toggle.Value
+		        Addon:Update()
+		    end
+		end
 
             Library:SafeCallback(Toggle.Callback, Toggle.Value)
             Library:SafeCallback(Toggle.Changed, Toggle.Value)
