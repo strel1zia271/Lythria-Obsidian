@@ -2123,7 +2123,7 @@ do
 		    end
 		
 		    if (ParentObj.Type == "Toggle" or ParentObj.Type == "Hold") and KeyPicker.SyncToggleState then
-		        ParentObj:SetValue(true)
+		        ParentObj:SetValue(false)
 		    end
 		
 		    Library:SafeCallback(KeyPicker.Callback, KeyPicker.Toggled)
