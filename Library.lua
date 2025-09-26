@@ -2233,10 +2233,8 @@ do
 	
 	elseif KeyPicker.Mode == "Hold" then
 	    if HoldingKey then
-	        KeyPicker.Toggled = true
+	        KeyPicker.Toggled = not KeyPicker.Toggled
 	        KeyPicker:DoClick()
-	    else
-	        KeyPicker.Toggled = false
 	    end
 	
 	elseif KeyPicker.Mode == "Press" then
