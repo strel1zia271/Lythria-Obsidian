@@ -2131,7 +2131,6 @@ do
 		    end
 		
 		    Library:SafeCallback(KeyPicker.Callback, KeyPicker.Toggled)
-		    Library:SafeCallback(KeyPicker.Changed, KeyPicker.Toggled)
 		
 		    if KeyPicker.Mode == "Press" then
 		        KeyPicker.Toggled = false
