@@ -2231,6 +2231,14 @@ do
                     KeyPicker:DoClick()
                 end
 
+			if KeyPicker.Mode == "Hold" then
+		    if HoldingKey then
+		        KeyPicker.Toggled = true
+		        KeyPicker:DoClick()
+		    else
+		        KeyPicker.Toggled = false
+		    end
+
             elseif KeyPicker.Mode == "Press" then
                 if HoldingKey then
                     KeyPicker:DoClick()
