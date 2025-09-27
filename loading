@@ -137,3 +137,4 @@ fadeOutBg.Completed:Wait()
 
 screenGui:Destroy()
 blur:Destroy()
+wait(1)
